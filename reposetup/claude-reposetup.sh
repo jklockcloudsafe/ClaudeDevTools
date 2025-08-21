@@ -15,6 +15,7 @@ usage() {
     echo "Options:"
     echo "  --replace          Overwrite existing files with fresh templates"
     echo "  --dry-run          Show what would be done without making changes"
+    echo "  --install          Install as global 'claude-reposetup' command"
     echo "  -y, --yes          Skip confirmation prompts"
     echo "  -h, --help         Show this help message"
     echo ""
@@ -23,6 +24,7 @@ usage() {
     echo "  $0 /path/to/project       # Optimize specific directory"
     echo "  $0 --replace              # Replace all existing files with templates"
     echo "  $0 --dry-run ~/project    # Preview changes without applying them"
+    echo "  $0 --install              # Install as global command"
     exit 1
 }
 
@@ -49,6 +51,44 @@ create_backup() {
     else
         echo "  Would create backup: $(basename "$backup_file")"
     fi
+}
+
+# Function to install globally
+install_globally() {
+    local script_name="$1"
+    local target_command="$2"
+    
+    # Create bin directory if it doesn't exist
+    mkdir -p ~/bin
+    
+    # Check if command already exists
+    if [[ -f ~/bin/$target_command ]]; then
+        echo "Command $target_command already installed"
+        echo "Updating $target_command script..."
+    else
+        echo "Installing $target_command script..."
+    fi
+    
+    # Copy current script to ~/bin with new name
+    cp "$0" ~/bin/$target_command
+    chmod +x ~/bin/$target_command
+    
+    # Ensure ~/bin is in PATH (idempotent)
+    export PATH="$HOME/bin:$PATH"
+    
+    # Add PATH to ~/.zshrc if not already present
+    if ! grep -q 'export PATH="$HOME/bin:$PATH"' ~/.zshrc 2>/dev/null; then
+        echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
+        echo "Added ~/bin to PATH in ~/.zshrc"
+    else
+        echo "PATH already configured in ~/.zshrc"
+    fi
+    
+    echo "$target_command installed and ready!"
+    echo "Usage: Run '$target_command' from anywhere"
+    echo "Restart your terminal or run 'source ~/.zshrc' to use immediately"
+    
+    exit 0
 }
 
 # Function to confirm replacement
@@ -94,6 +134,9 @@ while [[ $# -gt 0 ]]; do
         -y|--yes)
             SKIP_CONFIRMATIONS=true
             shift
+            ;;
+        --install)
+            install_globally "$(basename "$0")" "claude-reposetup"
             ;;
         -h|--help)
             usage

@@ -23,6 +23,7 @@ usage() {
     echo "  -v, --verbose      Show detailed validation information"
     echo "  -q, --quiet        Only show summary and errors"
     echo "  --json            Output results in JSON format"
+    echo "  --install         Install as global 'claude-repocheck' command"
     echo "  -h, --help        Show this help message"
     echo ""
     echo "Examples:"
@@ -30,7 +31,46 @@ usage() {
     echo "  $0 /path/to/project      # Check specific directory"
     echo "  $0 --verbose ~/project   # Check with detailed output"
     echo "  $0 --json                # Get machine-readable output"
+    echo "  $0 --install             # Install as global command"
     exit 1
+}
+
+# Function to install globally
+install_globally() {
+    local script_name="$1"
+    local target_command="$2"
+    
+    # Create bin directory if it doesn't exist
+    mkdir -p ~/bin
+    
+    # Check if command already exists
+    if [[ -f ~/bin/$target_command ]]; then
+        echo "Command $target_command already installed"
+        echo "Updating $target_command script..."
+    else
+        echo "Installing $target_command script..."
+    fi
+    
+    # Copy current script to ~/bin with new name
+    cp "$0" ~/bin/$target_command
+    chmod +x ~/bin/$target_command
+    
+    # Ensure ~/bin is in PATH (idempotent)
+    export PATH="$HOME/bin:$PATH"
+    
+    # Add PATH to ~/.zshrc if not already present
+    if ! grep -q 'export PATH="$HOME/bin:$PATH"' ~/.zshrc 2>/dev/null; then
+        echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
+        echo "Added ~/bin to PATH in ~/.zshrc"
+    else
+        echo "PATH already configured in ~/.zshrc"
+    fi
+    
+    echo "$target_command installed and ready!"
+    echo "Usage: Run '$target_command' from anywhere"
+    echo "Restart your terminal or run 'source ~/.zshrc' to use immediately"
+    
+    exit 0
 }
 
 # List of required files (must match claude-reposetup.sh)
@@ -63,6 +103,9 @@ while [[ $# -gt 0 ]]; do
         --json)
             JSON_OUTPUT=true
             shift
+            ;;
+        --install)
+            install_globally "$(basename "$0")" "claude-repocheck"
             ;;
         -h|--help)
             usage

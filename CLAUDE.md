@@ -4,41 +4,128 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ClaudeDevTools is a collection of shell scripts and utilities for optimizing repositories and development environments for Claude Code usage. It provides tools for health checking, conversation management, authentication switching, and repository setup automation.
+ClaudeDevTools is a comprehensive suite of shell scripts and utilities for optimizing repositories and development environments for Claude Code usage. It provides tools for repository setup, health checking, session management, usage analytics, configuration optimization, and authentication management.
 
 ## Repository Structure
 
 ```
 ClaudeDevTools/
-├── claude-check.sh           # Health check for Claude optimization files
+├── install-all.sh            # Master installer for all tools
 ├── claude-convo.sh           # Interactive conversation prompt builder
-├── claude-credchange.sh      # Authentication management for Claude Code
-└── reposetup/               # Repository optimization deployment tool
-    ├── claude-reposetup.sh  # Main deployment script
-    └── artifacts/           # Template files for deployment
-        ├── CLAUDE.md        # Template documentation
-        ├── PROJECT_CONTEXT.md # Template project context
-        ├── project-health.sh  # Template health check
-        └── request-templates.txt # Request templates
+├── reposetup/               # Repository setup and validation
+│   ├── claude-reposetup.sh  # Repository optimization deployment
+│   ├── claude-repocheck.sh  # Health checking and validation
+│   └── artifacts/           # Template files for deployment
+├── session/                 # Session management
+│   └── claude-session.sh    # Repository-specific session tracking
+├── usage/                   # Usage analytics and monitoring
+│   └── claude-usage.sh      # API usage and cost tracking
+├── optimize/                # Configuration optimization
+│   └── claude-optimize.sh   # Claude file optimization
+└── creds/                   # Authentication management
+    └── claude-credchange.sh # Authentication switching
 ```
 
-## Key Scripts and Usage
+## Installation
 
-### claude-check.sh
-Health check script that validates Claude Code optimization files in a target directory.
+### Quick Install (All Tools)
+Install all Claude development tools with a single command:
 
 ```bash
-# Check current directory
-./claude-check.sh
-
-# Check specific directory
-./claude-check.sh /path/to/project
+./install-all.sh
 ```
 
-Checks for: `.claude.json`, `.claudeignore`, `CLAUDE.md`, `.claude-rules`, `PROJECT_CONTEXT.md`, `request-templates.txt`, `project-health.sh`
+This installs the following global commands:
+- `claude-reposetup` - Repository setup and optimization
+- `claude-repocheck` - Health checking and validation 
+- `claude-session` - Session management
+- `claude-usage` - Usage analytics and cost tracking
+- `claude-optimize` - Configuration optimization
+- `claude-switch` - Authentication management
 
-### claude-convo.sh
-Interactive conversation builder with structured prompting workflow.
+### Individual Installation
+Each tool can be installed individually:
+
+```bash
+./reposetup/claude-reposetup.sh --install
+./session/claude-session.sh --install
+# etc.
+```
+
+## Tool Overview and Usage
+
+### claude-reposetup
+Deploy Claude optimization files to any repository.
+
+```bash
+claude-reposetup                    # Setup current directory
+claude-reposetup /path/to/project   # Setup specific directory
+claude-reposetup --replace          # Replace existing files
+claude-reposetup --dry-run          # Preview changes
+```
+
+Creates: `.claude.json`, `.claudeignore`, `CLAUDE.md`, `.claude-rules`, `PROJECT_CONTEXT.md`, `request-templates.txt`, `project-health.sh`
+
+### claude-repocheck
+Validate and analyze Claude optimization status.
+
+```bash
+claude-repocheck                    # Check current directory
+claude-repocheck --verbose          # Detailed output
+claude-repocheck --json             # Machine-readable output
+claude-repocheck /path/to/project   # Check specific directory
+```
+
+### claude-session
+Manage repository-specific Claude conversation sessions.
+
+```bash
+claude-session save feature-x       # Save current session
+claude-session list                 # List all sessions
+claude-session resume feature-x     # Resume previous session
+claude-session export feature-x     # Export to markdown
+```
+
+Sessions are stored in `.claude/sessions/` and include project context, git state, and timestamps.
+
+### claude-usage
+Monitor Claude API usage and costs.
+
+```bash
+claude-usage                        # Weekly summary
+claude-usage daily                  # Daily breakdown
+claude-usage costs                  # Cost estimates
+claude-usage status                 # Auth and rate limits
+claude-usage --json                 # JSON output
+```
+
+### claude-optimize
+Optimize Claude configuration files for better performance.
+
+```bash
+claude-optimize                     # Analyze current directory
+claude-optimize --fix              # Apply optimizations
+claude-optimize --backup --fix     # Apply with backups
+claude-optimize --json              # JSON analysis
+```
+
+Analyzes and optimizes `.claudeignore`, `.claude.json`, `CLAUDE.md`, and `PROJECT_CONTEXT.md`.
+
+### claude-switch
+Switch between Pro subscription and API key authentication.
+
+```bash
+claude-switch                       # Interactive menu
+```
+
+Options:
+1. Pro/Max Subscription mode (default)
+2. API Key mode (pay-per-use) 
+3. Show current status
+4. Clear all authentication
+
+### claude-convo (Development)
+Interactive conversation builder - currently in development.
 
 ```bash
 ./claude-convo.sh
@@ -46,62 +133,9 @@ Interactive conversation builder with structured prompting workflow.
 
 Features:
 - File path completion with @ symbol
-- Preview mode for request formatting
 - Structured TASK → SPECIFICS → CONSTRAINTS workflow
-- Automatic clipboard copying
+- Preview mode and clipboard integration
 - Edit functionality for previous requests
-
-### claude-credchange.sh (claude-switch)
-Authentication management tool for switching between Pro subscription and API key modes.
-
-```bash
-./claude-credchange.sh
-# Or after installation:
-claude-switch
-```
-
-Options:
-1. Pro/Max Subscription mode (default)
-2. API Key mode (pay-per-use)
-3. Show current status
-4. Clear all authentication
-
-### reposetup/claude-reposetup.sh
-Deploys Claude optimization files from the artifacts directory to target repositories.
-
-```bash
-# Deploy to current directory (skip existing files)
-./reposetup/claude-reposetup.sh
-
-# Deploy to specific directory
-./reposetup/claude-reposetup.sh /path/to/target
-
-# Replace existing files with fresh templates (creates backups)
-./reposetup/claude-reposetup.sh --replace
-
-# Preview changes without applying them
-./reposetup/claude-reposetup.sh --dry-run
-
-# Skip confirmation prompts
-./reposetup/claude-reposetup.sh --replace --yes
-```
-
-### reposetup/claude-repocheck.sh
-Comprehensive checking and validation tool for Claude Code optimization files.
-
-```bash
-# Check current directory
-./reposetup/claude-repocheck.sh
-
-# Check specific directory with verbose output
-./reposetup/claude-repocheck.sh --verbose /path/to/project
-
-# Get machine-readable JSON output
-./reposetup/claude-repocheck.sh --json
-
-# Quiet mode (only errors and summary)
-./reposetup/claude-repocheck.sh --quiet
-```
 
 ## Architecture Patterns
 
@@ -196,6 +230,23 @@ All scripts implement:
 
 ## Installation and Deployment
 
-The repository is designed to be self-contained. The `claude-credchange.sh` script includes installation functionality for the `claude-switch` command in `~/bin/`.
+The repository provides a master installer that sets up all tools:
 
-For repository optimization deployment, use `claude-reposetup.sh` which copies template files and updates `.gitignore` appropriately.
+```bash
+./install-all.sh                   # Install all tools
+./install-all.sh --update          # Update existing installations
+./install-all.sh --list            # Show installation status
+./install-all.sh --uninstall       # Remove all tools
+```
+
+All tools are installed to `~/bin/` and automatically added to PATH. Individual tools can also be installed using their `--install` flag.
+
+## Workflow Integration
+
+### Typical Usage Flow
+1. **Setup**: `claude-reposetup` - Initialize repository for Claude
+2. **Validate**: `claude-repocheck` - Verify optimization status
+3. **Optimize**: `claude-optimize --fix` - Tune configuration files
+4. **Work**: `claude-session save` - Save conversation contexts
+5. **Monitor**: `claude-usage` - Track API usage and costs
+6. **Manage**: `claude-switch` - Handle authentication as needed
