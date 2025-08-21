@@ -1,4 +1,5 @@
 #!/bin/bash
+# Property of CloudSafe
 # claudeswitch.sh - Install claude-switch authentication management script (idempotent)
 
 # Create bin directory if it doesn't exist

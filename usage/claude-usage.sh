@@ -1,4 +1,5 @@
 #!/bin/bash
+# Property of CloudSafe
 # claude-usage.sh - Claude API usage analytics and cost tracking
 
 set -e

@@ -1,4 +1,5 @@
 #!/bin/bash
+# Property of CloudSafe
 #
 # Project health check for Claude Code optimization
 

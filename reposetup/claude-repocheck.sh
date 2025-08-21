@@ -1,4 +1,5 @@
 #!/bin/bash
+# Property of CloudSafe
 # claude-repocheck.sh - Check for Claude Code optimization files
 
 set -e
@@ -435,7 +436,7 @@ else
 
         if has_placeholders "$TARGET_DIR/CLAUDE.md" >/dev/null 2>&1 || \
            has_placeholders "$TARGET_DIR/PROJECT_CONTEXT.md" >/dev/null 2>&1; then
-EOF
+            echo "- Customize template files (CLAUDE.md, PROJECT_CONTEXT.md) for your project"
         fi
         exit 1
 fi

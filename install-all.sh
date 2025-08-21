@@ -1,4 +1,5 @@
 #!/bin/bash
+# Property of CloudSafe
 # install-all.sh - Install all Claude development tools globally
 
 set -e

@@ -1,4 +1,5 @@
 # ClaudeDevTools
+<!-- Property of CloudSafe -->
 
 > A comprehensive suite of shell scripts for optimizing repositories and development environments for Claude Code
 

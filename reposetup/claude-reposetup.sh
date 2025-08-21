@@ -1,4 +1,5 @@
 #!/bin/bash
+# Property of CloudSafe
 # claude-reposetup.sh - Deploy Claude Code optimization files to any repository
 
 set -e

@@ -1,4 +1,5 @@
 # CLAUDE.md
+<!-- Property of CloudSafe -->
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -11,7 +12,6 @@ ClaudeDevTools is a comprehensive suite of shell scripts and utilities for optim
 ```
 ClaudeDevTools/
 ├── install-all.sh            # Master installer for all tools
-├── claude-convo.sh           # Interactive conversation prompt builder
 ├── reposetup/               # Repository setup and validation
 │   ├── claude-reposetup.sh  # Repository optimization deployment
 │   ├── claude-repocheck.sh  # Health checking and validation
@@ -124,18 +124,6 @@ Options:
 3. Show current status
 4. Clear all authentication
 
-### claude-convo (Development)
-Interactive conversation builder - currently in development.
-
-```bash
-./claude-convo.sh
-```
-
-Features:
-- File path completion with @ symbol
-- Structured TASK → SPECIFICS → CONSTRAINTS workflow
-- Preview mode and clipboard integration
-- Edit functionality for previous requests
 
 ## Architecture Patterns
 
@@ -191,12 +179,6 @@ Scripts are primarily tested through manual execution on target platforms. Each 
 ### Adding New Templates
 New template files should be added to `reposetup/artifacts/` and referenced in `claude-reposetup.sh` for deployment.
 
-### Modifying Conversation Workflow
-The conversation builder in `claude-convo.sh` uses a structured approach:
-1. TASK collection
-2. SPECIFICS gathering with file completion
-3. CONSTRAINTS application with smart filtering
-4. Request formatting and clipboard integration
 
 ## Configuration Files
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+# Property of CloudSafe
 # claude-session.sh - Repository-specific Claude session management
 #
 # This tool manages Claude Code conversation sessions by capturing and storing:

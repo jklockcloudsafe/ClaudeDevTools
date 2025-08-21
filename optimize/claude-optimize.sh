@@ -1,4 +1,5 @@
 #!/bin/bash
+# Property of CloudSafe
 # claude-optimize.sh - Optimize Claude configuration files for better performance
 
 set -e
