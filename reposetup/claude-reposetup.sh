@@ -73,6 +73,15 @@ install_globally() {
     cp "$0" ~/bin/$target_command
     chmod +x ~/bin/$target_command
     
+    # Copy artifacts directory to ~/bin if it exists
+    if [[ -d "$ARTIFACTS_DIR" ]]; then
+        echo "Copying artifacts directory..."
+        cp -r "$ARTIFACTS_DIR" ~/bin/
+        echo "Artifacts copied to ~/bin/artifacts"
+    else
+        echo "Warning: Artifacts directory not found at $ARTIFACTS_DIR"
+    fi
+    
     # Ensure ~/bin is in PATH (idempotent)
     export PATH="$HOME/bin:$PATH"
     
@@ -136,6 +145,9 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --install)
+            # Set up variables needed for installation
+            SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+            ARTIFACTS_DIR="$SCRIPT_DIR/artifacts"
             install_globally "$(basename "$0")" "claude-reposetup"
             ;;
         -h|--help)

@@ -96,10 +96,11 @@ get_claude_config() {
 find_claude_logs() {
     # Common log locations for Claude Code
     LOG_PATHS=(
-        "$HOME/.claude/logs"
-        "$HOME/.config/claude/logs"
-        "/tmp/claude-logs"
-        "."
+        "$HOME/Library/Logs/Claude"              # macOS primary location
+        "$HOME/.claude/logs"                     # Alternative location
+        "$HOME/.config/claude/logs"              # Linux location
+        "$HOME/.local/share/claude/logs"         # Linux alternative
+        "/var/log/claude"                        # System-wide logs
     )
     
     CLAUDE_LOGS=()
@@ -125,6 +126,18 @@ parse_usage_from_logs() {
     
     if [[ ${#CLAUDE_LOGS[@]} -eq 0 ]]; then
         echo "Warning: No Claude log files found"
+        echo ""
+        echo "Claude usage tracking requires API key mode. In SSO/Pro subscription mode,"
+        echo "usage data is not available locally and this is expected behavior."
+        echo ""
+        echo "Expected log locations:"
+        echo "  macOS: ~/Library/Logs/Claude/"
+        echo "  Linux: ~/.config/claude/logs/ or ~/.local/share/claude/logs/"
+        echo ""
+        echo "To track usage:"
+        echo "  1. Switch to API key mode: claude-switch --api"
+        echo "  2. Or use Claude Code's built-in /status command"
+        echo "  3. Or monitor usage in your Anthropic console"
         return
     fi
     

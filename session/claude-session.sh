@@ -1,5 +1,19 @@
 #!/bin/bash
 # claude-session.sh - Repository-specific Claude session management
+#
+# This tool manages Claude Code conversation sessions by capturing and storing:
+# - Git repository state (branch, commit hash, working directory)
+# - Project context (presence of CLAUDE.md, PROJECT_CONTEXT.md, .claude.json)
+# - Session metadata (timestamp, repository name, session notes)
+# - Sessions are stored in .claude/sessions/ within each repository
+#
+# When you resume a session, you get context about:
+# - What branch you were working on
+# - What commit you were at
+# - What project configuration was present
+# - When the session was created
+#
+# This helps Claude Code understand the project state when you return to work.
 
 set -e
 

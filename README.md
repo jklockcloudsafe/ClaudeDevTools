@@ -124,13 +124,12 @@ claude-usage export
 ### Switching Authentication
 
 ```bash
-# Interactive authentication management
+# Show current authentication status
 claude-switch
 
-# Options:
-# 1. Pro/Max Subscription (default)
-# 2. API Key mode (pay-per-use)
-# 3. Show current status
+# Switch authentication modes
+claude-switch --sso                 # SSO/Pro subscription
+claude-switch --api                 # API key mode (pay-per-use)
 ```
 
 ## Tool Documentation
@@ -171,39 +170,59 @@ claude-repocheck /path/to/project   # Check specific directory
 
 ### claude-session
 
-Repository-specific conversation session management.
+Repository-specific conversation session management that captures git state and project context.
+
+**What Gets Saved:**
+- Git repository state (branch, commit hash, working directory)
+- Project context (presence of CLAUDE.md, PROJECT_CONTEXT.md, .claude.json)
+- Session metadata (timestamp, repository name)
+- Sessions stored in `.claude/sessions/` within each repository
 
 **Key Features:**
-- Save conversation contexts with project state
-- Resume sessions with full history
-- Export sessions to markdown
-- Automatic cleanup of old sessions
+- Save conversation contexts with full project state
+- Resume sessions with git and project context
+- Export sessions to markdown for documentation
+- Repository-specific session isolation
 
 ```bash
-claude-session save feature-x       # Save named session
-claude-session list                 # List all sessions
-claude-session resume feature-x     # Resume session
+claude-session save feature-x       # Save named session with current git state
+claude-session list                 # List all sessions for this repository
+claude-session resume feature-x     # Resume with project context
 claude-session export feature-x     # Export to markdown
-claude-session clean                # Remove old sessions
+claude-session clean                # Remove old sessions (>30 days)
 ```
+
+**How Resume Works:**
+When you resume a session, you get context about what branch you were on, what commit you were at, what project configuration was present, and when the session was created. This helps Claude Code understand the project state when you return to work.
 
 ### claude-usage
 
-Monitor Claude API usage and costs.
+Monitor Claude API usage and costs (API key mode only).
+
+**Important:** This tool only works when using API key authentication. In SSO/Pro subscription mode, usage data is not available locally and showing no data is expected behavior.
+
+**Log File Locations:**
+- macOS: `~/Library/Logs/Claude/`
+- Linux: `~/.config/claude/logs/` or `~/.local/share/claude/logs/`
 
 **Key Features:**
-- Real-time usage analytics
+- Real-time usage analytics (API mode only)
 - Cost estimation and projections
 - Rate limit monitoring
 - CSV export capabilities
 
 ```bash
-claude-usage                        # Weekly summary
+claude-usage                        # Weekly summary (if logs available)
 claude-usage daily                  # Daily breakdown
 claude-usage costs                  # Cost estimates
 claude-usage --period 30            # Last 30 days
 claude-usage --json                 # JSON output
 ```
+
+**Alternative Usage Monitoring:**
+- Use Claude Code's built-in `/status` command
+- Monitor usage in your Anthropic console
+- Check VS Code status bar (if using Claude Code extension)
 
 ### claude-optimize
 
@@ -224,21 +243,25 @@ claude-optimize --json              # Analysis output
 
 ### claude-switch
 
-Switch between Pro subscription and API key authentication.
+Switch between SSO/Pro subscription and API key authentication.
 
 **Key Features:**
-- Interactive authentication management
+- Command-line authentication switching
 - Conflict prevention and cleanup
 - Environment configuration
 - Status verification
 
 ```bash
-claude-switch                       # Interactive menu
-# 1. Pro/Max Subscription mode
-# 2. API Key mode (pay-per-use)
-# 3. Show current status
-# 4. Clear authentication
+claude-switch                       # Show current authentication status
+claude-switch --sso                 # Switch to SSO/Pro subscription mode
+claude-switch --api                 # Switch to API key mode (pay-per-use)
 ```
+
+**Authentication Status Display:**
+- Current authentication mode (subscription/api/unknown)
+- API key presence
+- Configuration file status
+- Conflict warnings if API key is set in subscription mode
 
 ## Advanced Features
 
