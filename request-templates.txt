@@ -1,0 +1,97 @@
+# Property of CloudSafe
+# CLAUDE CODE REQUEST TEMPLATES
+
+## MODIFY TEMPLATE
+```
+Follow the development rules in PROJECT_CONTEXT.md for this task.
+
+TASK: {task_description}
+TARGET: {file_path}
+CHANGE: {specific_change}
+CONSTRAINTS: Only modify {file_path}. Maintain cross-platform compatibility.
+CONFIRMATION: List changes before implementing.
+```
+
+Usage Example:
+TASK: Add Windows PowerShell detection to health check
+TARGET: project-health.sh
+CHANGE: Add PowerShell version check for Windows environments
+CONSTRAINTS: Only modify project-health.sh. Maintain cross-platform compatibility.
+CONFIRMATION: List changes before implementing.
+
+## DEBUG TEMPLATE
+```
+Follow the development rules in PROJECT_CONTEXT.md for this task.
+
+DEBUGGING: {issue_description}
+FILE: {file_path}
+ERROR: {error_message}
+FIX: {requested_fix_only}
+CONSTRAINTS: Fix only this specific issue. Test on target platform.
+```
+
+Usage Example:
+DEBUGGING: Script fails with permission denied
+FILE: workstation/macos/admin.sh
+ERROR: brew: command not found
+FIX: Add Homebrew PATH evaluation before brew commands
+CONSTRAINTS: Fix only this specific issue. Test on target platform.
+
+## FEATURE TEMPLATE
+```
+Follow the development rules in PROJECT_CONTEXT.md for this task.
+
+FEATURE: {feature_name}
+SCOPE: {specific_scope}
+FILES: {files_to_modify}
+REQUIREMENTS: {exact_requirements}
+CONSTRAINTS: Implement only specified requirements. Maintain idempotent execution.
+```
+
+Usage Example:
+FEATURE: Add VS Code extension validation
+SCOPE: Verify essential extensions are installed
+FILES: workstation/macos/user.sh, workstation/windows/user.ps1
+REQUIREMENTS: Check for anthropic.claude-code extension before proceeding
+CONSTRAINTS: Implement only specified requirements. Maintain idempotent execution.
+
+## REVIEW TEMPLATE
+```
+Follow the development rules in PROJECT_CONTEXT.md for this task.
+
+REVIEW: {what_to_review}
+FOCUS: {specific_areas}
+OUTPUT: {requested_output_format}
+CONSTRAINTS: Review only requested areas. Consider cross-platform implications.
+```
+
+Usage Example:
+REVIEW: DevContainer configuration
+FOCUS: VS Code extensions and base image selection
+OUTPUT: List of recommendations for improvement
+CONSTRAINTS: Review only requested areas. Consider cross-platform implications.
+
+## QUICK REFERENCE
+
+### Starting a Session:
+1. "Follow the development rules in PROJECT_CONTEXT.md for this task"
+2. "Read CLAUDE.md for project architecture overview"
+3. Use appropriate template above
+
+### Template Variables:
+- {task_description} - What you want done
+- {file_path} - Specific script to modify
+- {specific_change} - Exact change needed
+- {platform} - Target platform (macOS, Windows, DevContainer)
+
+### Common Constraints:
+- "Maintain cross-platform compatibility"
+- "Do not break idempotent execution"
+- "Test on target platform before submission"
+- "Do not add external dependencies without approval"
+- "Follow existing code style and error handling patterns"
+
+### Platform-Specific Notes:
+- **macOS**: Use Homebrew, bash/zsh, ~/Library paths
+- **Windows**: Use Chocolatey, PowerShell, %APPDATA% paths  
+- **DevContainer**: Use apt, bash, Ubuntu 22.04 conventions

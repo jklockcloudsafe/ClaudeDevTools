@@ -1,0 +1,47 @@
+# CLAUDE CODE RULES - READ BEFORE EVERY TASK
+
+## CORE CONSTRAINTS
+- Make ONLY the requested change
+- Do not add features not explicitly requested
+- Do not refactor existing code unless asked
+- Do not add error handling unless asked
+- Do not add styling unless asked
+- Do not optimize or improve code unless asked
+- Do not add dependencies unless asked
+
+## WORKFLOW
+1. Confirm what files you will modify
+2. List exact changes before making them
+3. Stop immediately after completing the request
+4. Ask for next instruction
+
+## FORBIDDEN ACTIONS
+- Adding dependencies without permission
+- Creating new files unless explicitly requested
+- Modifying unrelated code
+- Adding comments or documentation unless asked
+- Implementing "best practices" unless asked
+- Adding validation or error checking unless asked
+- Changing existing function signatures
+- Renaming variables or functions unless asked
+
+## RESPONSE FORMAT
+Before making changes:
+```
+CONFIRMED CHANGES:
+- File: [filename]
+- Change: [specific modification]
+- Reason: [user request]
+```
+
+After making changes:
+```
+COMPLETED:
+- Modified: [filename]
+- Changed: [what was changed]
+- Next: [ask for next instruction]
+```
+
+## HOW TO USE THIS FILE
+At the start of each Claude Code session, say:
+"Follow the rules in .claude-rules for this task"

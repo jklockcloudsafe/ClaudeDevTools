@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "project": {
+    "name": "Your Project Name",
+    "description": "Project optimized for Claude Code development"
+  },
+  "rules": [
+    "Follow existing code patterns and conventions",
+    "Write comprehensive tests for new features", 
+    "Update documentation for any API changes",
+    "Be specific about file locations and implementation details",
+    "Explain reasoning before implementing complex changes"
+  ],
+  "context_files": [
+    "README.md",
+    "package.json",
+    "requirements.txt",
+    "Dockerfile",
+    ".env.example",
+    "tsconfig.json",
+    "jest.config.js",
+    "tailwind.config.js"
+  ],
+  "preferences": {
+    "code_style": "Follow existing patterns in codebase",
+    "testing": "Write appropriate tests for new functionality",
+    "documentation": "Clear, concise, and up-to-date",
+    "error_handling": "Robust error handling with appropriate logging"
+  }
+}
