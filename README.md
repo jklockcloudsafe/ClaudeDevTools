@@ -3,7 +3,6 @@
 
 > A comprehensive suite of shell scripts for optimizing repositories and development environments for Claude Code
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Shell](https://img.shields.io/badge/shell-bash-green.svg)](https://www.gnu.org/software/bash/)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey.svg)](https://github.com/johnklockenkemper/ClaudeDevTools)
 
@@ -118,7 +117,7 @@ claude-usage daily
 # Cost estimates and projections
 claude-usage costs
 
-# Export usage data
+# Export usage data  
 claude-usage export
 ```
 
@@ -339,7 +338,7 @@ cd ClaudeDevTools
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is provided as-is for educational and development purposes.
 
 ## Support & Feedback
 

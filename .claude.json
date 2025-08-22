@@ -1,30 +1,34 @@
 {
   "version": "1.0",
   "project": {
-    "name": "Your Project Name",
-    "description": "Project optimized for Claude Code development"
+    "name": "ClaudeDevTools",
+    "description": "Comprehensive suite of shell scripts for optimizing repositories and development environments for Claude Code usage"
   },
   "rules": [
-    "Follow existing code patterns and conventions",
-    "Write comprehensive tests for new features", 
-    "Update documentation for any API changes",
-    "Be specific about file locations and implementation details",
-    "Explain reasoning before implementing complex changes"
+    "Follow existing shell script patterns and conventions",
+    "Test scripts on both macOS and Linux environments", 
+    "Update documentation for any command changes or new features",
+    "Be specific about file locations and script paths",
+    "Maintain backward compatibility for existing installations",
+    "Follow the .claude-rules file for all code changes"
   ],
   "context_files": [
     "README.md",
-    "package.json",
-    "requirements.txt",
-    "Dockerfile",
-    ".env.example",
-    "tsconfig.json",
-    "jest.config.js",
-    "tailwind.config.js"
+    "CLAUDE.md",
+    "PROJECT_CONTEXT.md",
+    "install-all.sh",
+    "reposetup/claude-reposetup.sh",
+    "reposetup/claude-repocheck.sh",
+    "session/claude-session.sh",
+    "usage/claude-usage.sh",
+    "optimize/claude-optimize.sh",
+    "creds/claude-credchange.sh",
+    "project-health.sh"
   ],
   "preferences": {
-    "code_style": "Follow existing patterns in codebase",
-    "testing": "Write appropriate tests for new functionality",
-    "documentation": "Clear, concise, and up-to-date",
-    "error_handling": "Robust error handling with appropriate logging"
+    "code_style": "POSIX-compliant shell scripts with bash 3.2+ compatibility",
+    "testing": "Manual testing across different platforms and environments",
+    "documentation": "Clear usage examples and help text in all scripts",
+    "error_handling": "Comprehensive input validation and graceful error messages"
   }
 }

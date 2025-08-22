@@ -3,63 +3,66 @@
 
 ## Current State
 
-- **Project Type**: [Describe your project type - web app, API, library, etc.]
-- **Tech Stack**: [List your main technologies - language, framework, database]
-- **File Structure**: [Brief overview of main directories and their purposes]
-- **Build Process**: [How to build/compile your project]
+- **Project Type**: Shell script suite for Claude Code optimization
+- **Tech Stack**: Bash shell scripts (3.2+ compatible), JSON configuration files, CLI tools
+- **File Structure**: Organized by functionality - reposetup/, session/, usage/, optimize/, creds/
+- **Build Process**: No compilation needed; scripts are executable shell files
 
 ## Development Rules
 
-- **Change Policy**: [How changes should be made - review process, testing requirements]
-- **Dependencies**: [How to manage dependencies - package manager, version constraints]
-- **Frameworks**: [Key frameworks/libraries used and their versions]
-- **Optimization**: [Performance considerations and optimization guidelines]
-- **File Creation**: [Guidelines for creating new files and organizing code]
+- **Change Policy**: Follow .claude-rules file; minimal changes only; test on macOS and Linux
+- **Dependencies**: External: git, curl, jq (auto-installed); Internal: cross-script integration
+- **Frameworks**: Pure bash with POSIX compliance for maximum compatibility
+- **Optimization**: Scripts are idempotent and can be run multiple times safely
+- **File Creation**: Follow existing directory structure; use template system in artifacts/
 
 ## Current Architecture
 
 - **Main Files**: 
-  - `[main-file-1]` - [Description of primary application file]
-  - `[main-file-2]` - [Description of another key file]
-  - `[config-file]` - [Description of main configuration file]
-- **Entry Points**: [How users/systems interact with your application]
-- **Configuration**: [Where and how configuration is managed]
-- **Dependencies**: [Key external dependencies and how they're used]
+  - `install-all.sh` - Master installer for all tools
+  - `reposetup/claude-reposetup.sh` - Repository optimization deployment
+  - `session/claude-session.sh` - Conversation session management
+  - `usage/claude-usage.sh` - API usage and cost tracking
+- **Entry Points**: Global commands installed to ~/bin/ via install-all.sh
+- **Configuration**: Template files in reposetup/artifacts/ deployed to target repositories
+- **Dependencies**: Self-contained with automatic dependency checking and installation
 
 ## Active Development
 
-- **Current Task**: [What you're currently working on]
+- **Current Task**: Repository documentation and configuration updates
 - **Recent Changes**: 
-  - [List recent significant changes]
-  - [Another recent change]
-  - [Third recent change]
-- **Known Issues**: [List any known bugs or limitations]
-- **Next Planned**: [What's planned for future development]
+  - Updated .claude.json with actual project information
+  - Customized .claudeignore for shell script repository
+  - Reviewed and updated PROJECT_CONTEXT.md with real project details
+- **Known Issues**: README contains references to missing LICENSE file
+- **Next Planned**: Update README to fix LICENSE references and GitHub URLs
 
 ## Task Queue
 
-1. [ ] [Task 1 - description]
-2. [ ] [Task 2 - description]  
-3. [ ] [Task 3 - description]
+1. [x] Update Claude configuration files with project-specific content
+2. [ ] Fix README LICENSE references and GitHub URLs
+3. [ ] Verify all CLI examples in README work correctly
+4. [ ] Ensure artifact templates are up to date
 
 ## Code Conventions
 
-- **File Naming**: [Your file naming convention - camelCase, kebab-case, etc.]
-- **Function Style**: [How functions should be named and structured]
-- **Import Style**: [How imports/requires should be organized]
-- **Formatting**: [Code formatting standards - indentation, spacing]
-- **Error Handling**: [How errors should be handled in your codebase]
+- **File Naming**: kebab-case for scripts (claude-toolname.sh), lowercase for directories
+- **Function Style**: snake_case functions with descriptive names and input validation
+- **Import Style**: Source other scripts with relative paths and error checking
+- **Formatting**: 4-space indentation, consistent error handling patterns
+- **Error Handling**: set -e for strict mode, comprehensive input validation, user-friendly error messages
 
 ## Testing Strategy
 
-**Unit Tests:**
-- [Testing framework used]
-- [Where test files are located]
-- [How to run tests]
+**Manual Testing:**
+- Test scripts on both macOS and Linux environments
+- Verify cross-platform compatibility (especially path handling)
+- Test installation and uninstallation processes
 
-**Integration Tests:**
-- [Integration testing approach]
-- [Test environment setup]
+**Integration Testing:**
+- Test tool interactions (repocheck recommends reposetup)
+- Verify global command installation works correctly
+- Test template deployment and file replacement scenarios
 
 ## HOW TO USE THIS FILE
 
